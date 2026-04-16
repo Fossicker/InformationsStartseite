@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Arbeitsorganisation – DRV Bund Abteilungsportal</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .ao-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 768px) { .ao-grid { grid-template-columns: 1fr; } }
+    .ao-section {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+    }
+    .ao-section-icon {
+      width: 40px; height: 40px;
+      background: var(--ice);
+      border-radius: var(--radius);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--navy); margin-bottom: 14px;
+    }
+    .ao-section-icon svg { width: 20px; height: 20px; }
+    .ao-section-title {
+      font-family: var(--font-display);
+      font-size: 17px; font-weight: 700;
+      color: var(--navy); margin-bottom: 14px;
+    }
+    .ao-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .ao-list li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 14px; line-height: 1.5; color: var(--gray-800);
+      padding: 8px 10px;
+      border-radius: var(--radius);
+      background: var(--gray-50);
+      border-left: 3px solid var(--ice-dark);
+      transition: var(--transition);
+    }
+    .ao-list li:hover { border-left-color: var(--lime); background: var(--ice); }
+    .ao-list li::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--lime-dim);
+      flex-shrink: 0; margin-top: 6px;
+    }
+    .ao-full {
+      grid-column: 1 / -1;
+    }
+    .ao-tag {
+      display: inline-block;
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: .6px;
+      color: var(--navy-light);
+      background: var(--ice);
+      padding: 3px 8px; border-radius: 3px;
+      margin: 2px;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-top">
+      <a class="logo-area" href="index.html">
+        <img class="logo-image" src="logo.svg" alt="DRV Bund Logo">
+        <div class="logo-text">
+          <h1>Informationsportal</h1>
+          <span>Deutsche Rentenversicherung Bund – Abteilung</span>
+        </div>
+      </a>
+    </div>
+    <nav class="header-nav">
+      <div class="nav-inner">
+        <a class="nav-link" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Startseite
+        </a>
+        <a class="nav-link" href="wir.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Wir
+        </a>
+        <a class="nav-link active" href="arbeitsorganisation.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Arbeitsorganisation
+        </a>
+        <a class="nav-link" href="aktuelles.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8z"/></svg>
+          Aktuelles
+        </a>
+        <a class="nav-link" href="organigramm.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><rect x="2" y="16" width="8" height="5" rx="1"/><rect x="14" y="16" width="8" height="5" rx="1"/><path d="M12 8v4M6 12h12M6 12v4M18 12v4"/></svg>
+          Organigramm
+        </a>
+        <a class="nav-link" href="schwarzes-brett.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          Schwarzes Brett
+        </a>
+        <a class="nav-link" href="kalender.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Kalender
+        </a>
+        <a class="nav-link admin" href="admin.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Admin
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="main-content">
+      <div class="page-title-section">
+        <h2 class="page-title">Arbeitsorganisation</h2>
+        <p class="page-subtitle">Prozesse, Tools und Leitfäden für unsere tägliche Arbeit</p>
+      </div>
+
+      <div class="ao-grid">
+
+        <div class="ao-section">
+          <div class="ao-section-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          </div>
+          <div class="ao-section-title">Regelungen &amp; Prozesse</div>
+          <ul class="ao-list">
+            <li>Geschäftsordnung der Abteilung</li>
+            <li>Unterschriftenregelung</li>
+            <li>Vertretungsregelungen</li>
+            <li>Postbearbeitung und Dokumentensteuerung</li>
+            <li>Berichtspflichten und Vorlagenwesen</li>
+          </ul>
+        </div>
+
+        <div class="ao-section">
+          <div class="ao-section-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <div class="ao-section-title">IT-Tools &amp; Systeme</div>
+          <ul class="ao-list">
+            <li>DIANA – Vorgangsbearbeitung</li>
+            <li>Microsoft 365 (Teams, SharePoint, Outlook)</li>
+            <li>Confluence – Wissensdatenbank</li>
+            <li>SAP HR – Personalverwaltung</li>
+            <li>VPN-Zugang &amp; Remote-Arbeitsplatz</li>
+          </ul>
+        </div>
+
+        <div class="ao-section">
+          <div class="ao-section-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          </div>
+          <div class="ao-section-title">Vorlagen &amp; Leitfäden</div>
+          <ul class="ao-list">
+            <li>Briefkopf und Schriftgutmuster</li>
+            <li>Präsentationsvorlage PowerPoint</li>
+            <li>Leitfaden Datenschutz im Alltag</li>
+            <li>Checkliste Einarbeitung neue Mitarbeitende</li>
+            <li>Leitfaden barrierefreie Dokumente</li>
+          </ul>
+        </div>
+
+        <div class="ao-section">
+          <div class="ao-section-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="ao-section-title">Arbeitszeiten &amp; Urlaub</div>
+          <ul class="ao-list">
+            <li>Gleitzeitregelung: Kernzeit 09:00–15:00 Uhr</li>
+            <li>Urlaubsantrag über das Personalportal</li>
+            <li>Homeoffice: bis zu 3 Tage/Woche möglich</li>
+            <li>Krankmeldung bis 10:00 Uhr an Referatsleitung</li>
+            <li>Zeiterfassung in SAP HR</li>
+          </ul>
+        </div>
+
+        <div class="ao-section ao-full">
+          <div class="ao-section-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="ao-section-title">Besprechungsformate</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px">
+            <span class="ao-tag">Wöchentlich</span>
+            <span class="ao-tag">Monatlich</span>
+            <span class="ao-tag">Quartalsweise</span>
+            <span class="ao-tag">Hybrid</span>
+            <span class="ao-tag">Vor Ort</span>
+          </div>
+          <ul class="ao-list" style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <li>Abteilungsleitungsbesprechung – monatlich</li>
+            <li>Dezernatsrunde – wöchentlich (montags)</li>
+            <li>Abteilungsversammlung – quartalsweise</li>
+            <li>Jour fixe Referatsleitungen – 14-tägig</li>
+            <li>Projektsteuerungsrunden – nach Bedarf</li>
+            <li>Retrospektiven – quartalsweise</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <strong>DRV Bund</strong> · Abteilungs-Informationsportal · © 2026 · Interne Nutzung
+  </footer>
+</body>
+</html>

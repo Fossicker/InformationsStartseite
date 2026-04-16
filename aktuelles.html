@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aktuelles – DRV Bund Abteilungsportal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-top">
+      <a class="logo-area" href="index.html">
+        <img class="logo-image" src="logo.svg" alt="DRV Bund Logo">
+        <div class="logo-text">
+          <h1>Informationsportal</h1>
+          <span>Deutsche Rentenversicherung Bund – Abteilung</span>
+        </div>
+      </a>
+    </div>
+    <nav class="header-nav">
+      <div class="nav-inner">
+        <a class="nav-link" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Startseite
+        </a>
+        <a class="nav-link" href="wir.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Wir
+        </a>
+        <a class="nav-link" href="arbeitsorganisation.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Arbeitsorganisation
+        </a>
+        <a class="nav-link active" href="aktuelles.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8z"/></svg>
+          Aktuelles
+        </a>
+        <a class="nav-link" href="organigramm.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><rect x="2" y="16" width="8" height="5" rx="1"/><rect x="14" y="16" width="8" height="5" rx="1"/><path d="M12 8v4M6 12h12M6 12v4M18 12v4"/></svg>
+          Organigramm
+        </a>
+        <a class="nav-link" href="schwarzes-brett.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          Schwarzes Brett
+        </a>
+        <a class="nav-link" href="kalender.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Kalender
+        </a>
+        <a class="nav-link admin" href="admin.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Admin
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="main-content">
+      <div class="page-title-section">
+        <h2 class="page-title">Aktuelles</h2>
+        <p class="page-subtitle">Alle Neuigkeiten und Beiträge aus der Abteilung</p>
+      </div>
+
+      <!-- Filter -->
+      <div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px" id="cat-filters"></div>
+
+      <!-- Blog-Liste -->
+      <div class="blog-grid" id="blog-grid">
+        <div class="empty-state"><p>Beiträge werden geladen…</p></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <strong>DRV Bund</strong> · Abteilungs-Informationsportal · © 2026 · Interne Nutzung
+  </footer>
+
+  <script src="data-store.js"></script>
+  <script>
+    let allPosts = [];
+    let activeCategory = 'Alle';
+
+    function renderFilters(posts) {
+      const cats = ['Alle', ...new Set(posts.map(p => p.category).filter(Boolean))];
+      document.getElementById('cat-filters').innerHTML = cats.map(cat =>
+        `<button class="filter-pill ${cat === activeCategory ? 'active' : ''}"
+                 onclick="setCategory('${cat}')">${cat}</button>`
+      ).join('');
+    }
+
+    function setCategory(cat) {
+      activeCategory = cat;
+      renderFilters(allPosts);
+      renderBlog(allPosts);
+    }
+
+    function renderBlog(posts) {
+      const grid = document.getElementById('blog-grid');
+      const filtered = activeCategory === 'Alle'
+        ? posts
+        : posts.filter(p => p.category === activeCategory);
+
+      if (!filtered.length) {
+        grid.innerHTML = '<div class="empty-state"><p>Keine Beiträge in dieser Kategorie.</p></div>';
+        return;
+      }
+      grid.innerHTML = filtered.map(p => `
+        <div class="blog-card">
+          <div class="blog-card-category">${DRV.escapeHtml(p.category || 'Allgemein')}</div>
+          <h3 class="blog-card-title">${DRV.escapeHtml(p.title)}</h3>
+          <p class="blog-card-excerpt">${DRV.escapeHtml(p.excerpt)}</p>
+          <div class="blog-card-meta">
+            <span>${DRV.escapeHtml(p.author || '')}</span>
+            <span>${DRV.escapeHtml(p.readTime || '')}</span>
+            <span>${DRV.formatDate(p.createdAt)}</span>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    DRV.subscribe('blog', (posts) => {
+      allPosts = posts;
+      renderFilters(posts);
+      renderBlog(posts);
+    });
+  </script>
+</body>
+</html>

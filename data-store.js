@@ -12,11 +12,13 @@
 (function () {
   // ── Storage-Keys ─────────────────────────────
   const STORAGE = {
-    blog:   'drv_blog_posts',
-    ticker: 'drv_news_ticker',
-    board:  'drv_schwarzes_brett',
+    blog:    'drv_blog_posts',
+    ticker:  'drv_news_ticker',
+    board:   'drv_schwarzes_brett',
+    termine: 'drv_termine',
+    fokus:   'drv_fokusthemen',
   };
-  const SEED_FLAG = 'drv_seeded_v1';
+  const SEED_FLAG = 'drv_seeded_v2';
 
   // ── Demo-Seed (einmalig beim ersten Laden) ──
   const DEMO_BLOG = [
@@ -72,15 +74,28 @@
     { id: 'seed_a3', title: 'Laufgruppe mittwochs', text: 'Wir joggen jeden Mittwoch um 17:30 ab Haupteingang, ca. 5 km. Alle Levels willkommen!', author: 'S. Park', category: 'Sport & Freizeit', createdAt: '2026-04-09T08:00:00.000Z' },
   ];
 
+  const DEMO_TERMINE = [
+    { id: 'seed_tr1', title: 'Betriebsversammlung', date: '2026-04-24', time: '14:00 Uhr', location: 'Großer Saal', createdAt: '2026-04-10T08:00:00.000Z' },
+    { id: 'seed_tr2', title: 'Abteilungsbesprechung Q2', date: '2026-05-06', time: '10:00 Uhr', location: 'Konferenzraum A3', createdAt: '2026-04-09T08:00:00.000Z' },
+    { id: 'seed_tr3', title: 'Firmenlauf Berlin', date: '2026-05-15', time: '17:30 Uhr', location: 'Treffpunkt Haupteingang', createdAt: '2026-04-05T08:00:00.000Z' },
+  ];
+
+  const DEMO_FOKUS = [
+    { id: 'seed_f1', title: 'Digitale Transformation', description: 'Umsetzung der IT-Roadmap 2025–2027 und Ablösung von Altsystemen.', createdAt: '2026-04-10T08:00:00.000Z' },
+    { id: 'seed_f2', title: 'Fachkräftegewinnung', description: 'Gezielte Maßnahmen zur Nachwuchsförderung und Mitarbeiterbindung.', createdAt: '2026-04-08T08:00:00.000Z' },
+    { id: 'seed_f3', title: 'Nachhaltigkeitsstrategie', description: 'Umsetzung der Klimaschutzziele und Green-IT-Initiativen im Haus.', createdAt: '2026-04-01T08:00:00.000Z' },
+  ];
+
   // ── Pub/Sub-Listener ────────────────────────
-  const listeners = { blog: [], ticker: [], board: [] };
+  const listeners = { blog: [], ticker: [], board: [], termine: [], fokus: [] };
 
   // ── Read/Write ──────────────────────────────
   function getAll(key) {
     try {
       const raw = localStorage.getItem(STORAGE[key]);
       const items = raw ? JSON.parse(raw) : [];
-      // Neueste zuerst
+      // Termine & Fokus: gespeicherte Reihenfolge beibehalten (Drag & Drop)
+      if (key === 'termine' || key === 'fokus') return items;
       return items.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
     } catch (e) {
       console.warn('[DRV] LocalStorage Lesefehler:', e);
@@ -104,7 +119,12 @@
       createdAt: new Date().toISOString(),
       ...item,
     };
-    items.unshift(newItem);
+    // Termine & Fokus: neue Einträge ans Ende (manuelle Reihenfolge)
+    if (key === 'termine' || key === 'fokus') {
+      items.push(newItem);
+    } else {
+      items.unshift(newItem);
+    }
     saveAll(key, items);
     notify(key);
     return newItem;
@@ -113,6 +133,15 @@
   function remove(key, id) {
     const items = getAll(key).filter(i => i.id !== id);
     saveAll(key, items);
+    notify(key);
+  }
+
+  /**
+   * Speichert eine neue Reihenfolge (Array von Items) direkt.
+   * Wird vom Drag & Drop im Admin aufgerufen.
+   */
+  function reorder(key, orderedItems) {
+    saveAll(key, orderedItems);
     notify(key);
   }
 
@@ -125,9 +154,13 @@
     saveAll('blog', DEMO_BLOG);
     saveAll('ticker', DEMO_TICKER);
     saveAll('board', DEMO_ADS);
+    saveAll('termine', DEMO_TERMINE);
+    saveAll('fokus', DEMO_FOKUS);
     notify('blog');
     notify('ticker');
     notify('board');
+    notify('termine');
+    notify('fokus');
   }
 
   // ── Subscribe ───────────────────────────────
@@ -156,9 +189,13 @@
   // ── Erstinitialisierung mit Demo-Daten ─────
   function seedIfEmpty() {
     if (localStorage.getItem(SEED_FLAG)) return;
+    // Ältere Seed-Flags löschen
+    localStorage.removeItem('drv_seeded_v1');
     saveAll('blog', DEMO_BLOG);
     saveAll('ticker', DEMO_TICKER);
     saveAll('board', DEMO_ADS);
+    saveAll('termine', DEMO_TERMINE);
+    saveAll('fokus', DEMO_FOKUS);
     localStorage.setItem(SEED_FLAG, '1');
     console.info('[DRV] Demo-Daten initialisiert.');
   }
@@ -186,6 +223,7 @@
     getAll,
     add,
     remove,
+    reorder,
     clear,
     resetToDemo,
     subscribe,

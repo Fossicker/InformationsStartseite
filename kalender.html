@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalender – DRV Bund Abteilungsportal</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .kalender-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 900px) { .kalender-layout { grid-template-columns: 1fr; } }
+
+    /* ── Kalender-Grid ── */
+    .cal-wrapper {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+    .cal-header {
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 24px;
+    }
+    .cal-header-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .cal-nav-btn {
+      background: rgba(255,255,255,.12);
+      border: none;
+      color: var(--white);
+      width: 36px; height: 36px;
+      border-radius: var(--radius);
+      cursor: pointer;
+      font-size: 18px;
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .cal-nav-btn:hover { background: rgba(255,255,255,.22); }
+    .cal-weekdays {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      background: var(--ice);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .cal-weekday {
+      text-align: center;
+      padding: 10px 4px;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .6px;
+      color: var(--gray-600);
+    }
+    .cal-weekday.weekend { color: var(--navy-light); }
+    .cal-days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+    }
+    .cal-day {
+      min-height: 72px;
+      padding: 8px;
+      border-right: 1px solid var(--gray-200);
+      border-bottom: 1px solid var(--gray-200);
+      cursor: pointer;
+      transition: background var(--transition);
+      position: relative;
+    }
+    .cal-day:nth-child(7n) { border-right: none; }
+    .cal-day:hover { background: var(--gray-50); }
+    .cal-day.other-month { background: var(--gray-50); }
+    .cal-day.other-month .cal-day-num { color: var(--gray-400); }
+    .cal-day.today .cal-day-num {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: 50%;
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .cal-day.selected { background: var(--ice); }
+    .cal-day.selected .cal-day-num {
+      background: var(--lime);
+      color: var(--navy);
+      border-radius: 50%;
+      width: 26px; height: 26px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700;
+    }
+    .cal-day.weekend-day { background: rgba(7,49,99,.02); }
+    .cal-day-num {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--gray-800);
+      margin-bottom: 4px;
+      line-height: 26px;
+      width: 26px;
+      text-align: center;
+    }
+    .cal-day-dots {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+      margin-top: 2px;
+    }
+    .cal-dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--lime-dim);
+      flex-shrink: 0;
+    }
+    .cal-day-event-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--navy);
+      background: var(--lime);
+      border-radius: 3px;
+      padding: 1px 5px;
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ── Termin-Detail-Panel ── */
+    .termin-panel {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      position: sticky;
+      top: 120px;
+    }
+    .termin-panel-header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 16px 20px;
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 700;
+    }
+    .termin-panel-body { padding: 12px; }
+    .termin-panel-item {
+      padding: 12px;
+      border-radius: var(--radius);
+      background: var(--gray-50);
+      border-left: 3px solid var(--lime-dim);
+      margin-bottom: 8px;
+    }
+    .termin-panel-item:last-child { margin-bottom: 0; }
+    .termin-panel-title { font-weight: 700; font-size: 14px; color: var(--navy); margin-bottom: 4px; }
+    .termin-panel-meta { font-size: 12px; color: var(--gray-600); }
+    .termin-panel-empty { padding: 20px; text-align: center; color: var(--gray-400); font-size: 13px; }
+
+    /* ── Alle Termine Liste ── */
+    .all-termine {
+      margin-top: 0;
+    }
+    .all-termine-title {
+      font-size: 12px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .7px;
+      color: var(--gray-400);
+      padding: 12px 20px 8px;
+      border-top: 1px solid var(--gray-200);
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-top">
+      <a class="logo-area" href="index.html">
+        <img class="logo-image" src="logo.svg" alt="DRV Bund Logo">
+        <div class="logo-text">
+          <h1>Informationsportal</h1>
+          <span>Deutsche Rentenversicherung Bund – Abteilung</span>
+        </div>
+      </a>
+    </div>
+    <nav class="header-nav">
+      <div class="nav-inner">
+        <a class="nav-link" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Startseite
+        </a>
+        <a class="nav-link" href="wir.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Wir
+        </a>
+        <a class="nav-link" href="arbeitsorganisation.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Arbeitsorganisation
+        </a>
+        <a class="nav-link" href="aktuelles.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8z"/></svg>
+          Aktuelles
+        </a>
+        <a class="nav-link" href="organigramm.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><rect x="2" y="16" width="8" height="5" rx="1"/><rect x="14" y="16" width="8" height="5" rx="1"/><path d="M12 8v4M6 12h12M6 12v4M18 12v4"/></svg>
+          Organigramm
+        </a>
+        <a class="nav-link" href="schwarzes-brett.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          Schwarzes Brett
+        </a>
+        <a class="nav-link active" href="kalender.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Kalender
+        </a>
+        <a class="nav-link admin" href="admin.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Admin
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <div class="main-content">
+      <div class="page-title-section">
+        <h2 class="page-title">Kalender</h2>
+        <p class="page-subtitle">Alle Termine der Abteilung auf einen Blick</p>
+      </div>
+
+      <div class="kalender-layout">
+        <!-- Kalender -->
+        <div>
+          <div class="cal-wrapper">
+            <div class="cal-header">
+              <button class="cal-nav-btn" onclick="prevMonth()">&#8249;</button>
+              <div class="cal-header-title" id="cal-title"></div>
+              <button class="cal-nav-btn" onclick="nextMonth()">&#8250;</button>
+            </div>
+            <div class="cal-weekdays">
+              <div class="cal-weekday">Mo</div>
+              <div class="cal-weekday">Di</div>
+              <div class="cal-weekday">Mi</div>
+              <div class="cal-weekday">Do</div>
+              <div class="cal-weekday">Fr</div>
+              <div class="cal-weekday weekend">Sa</div>
+              <div class="cal-weekday weekend">So</div>
+            </div>
+            <div class="cal-days" id="cal-days"></div>
+          </div>
+        </div>
+
+        <!-- Detail-Panel -->
+        <div class="termin-panel">
+          <div class="termin-panel-header" id="panel-header">Termine</div>
+          <div class="termin-panel-body" id="panel-body">
+            <div class="termin-panel-empty">Tag im Kalender wählen</div>
+          </div>
+          <div class="all-termine-title">Alle bevorstehenden Termine</div>
+          <div class="termin-panel-body" id="all-termine-list"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <strong>DRV Bund</strong> · Abteilungs-Informationsportal · © 2026 · Interne Nutzung
+  </footer>
+
+  <script src="data-store.js"></script>
+  <script>
+    const MONTHS_DE = ['Januar','Februar','März','April','Mai','Juni',
+                       'Juli','August','September','Oktober','November','Dezember'];
+
+    let termine = [];
+    let today = new Date();
+    let viewYear  = today.getFullYear();
+    let viewMonth = today.getMonth(); // 0-based
+    let selectedDate = null;
+
+    // ── Navigation ──────────────────────────────
+    function prevMonth() {
+      if (--viewMonth < 0) { viewMonth = 11; viewYear--; }
+      renderCalendar();
+    }
+    function nextMonth() {
+      if (++viewMonth > 11) { viewMonth = 0; viewYear++; }
+      renderCalendar();
+    }
+
+    // ── Kalender ────────────────────────────────
+    function renderCalendar() {
+      document.getElementById('cal-title').textContent =
+        MONTHS_DE[viewMonth] + ' ' + viewYear;
+
+      const firstDay = new Date(viewYear, viewMonth, 1);
+      const lastDay  = new Date(viewYear, viewMonth + 1, 0);
+
+      // Montag als Wochenanfang (0=Mo … 6=So)
+      let startDow = (firstDay.getDay() + 6) % 7;
+      const totalCells = Math.ceil((startDow + lastDay.getDate()) / 7) * 7;
+
+      const terminByDate = {};
+      termine.forEach(t => {
+        if (t.date) terminByDate[t.date] = (terminByDate[t.date] || []).concat(t);
+      });
+
+      const container = document.getElementById('cal-days');
+      container.innerHTML = '';
+
+      for (let i = 0; i < totalCells; i++) {
+        const dayOffset = i - startDow;
+        const date = new Date(viewYear, viewMonth, 1 + dayOffset);
+        const isCurrentMonth = date.getMonth() === viewMonth;
+        const isToday = date.toDateString() === today.toDateString();
+        const dateStr = toDateStr(date);
+        const isSelected = selectedDate === dateStr;
+        const dayTermine = terminByDate[dateStr] || [];
+        const dow = (date.getDay() + 6) % 7; // 5=Sa, 6=So
+        const isWeekend = dow >= 5;
+
+        const cell = document.createElement('div');
+        cell.className = [
+          'cal-day',
+          !isCurrentMonth ? 'other-month' : '',
+          isToday ? 'today' : '',
+          isSelected ? 'selected' : '',
+          isWeekend ? 'weekend-day' : '',
+        ].filter(Boolean).join(' ');
+
+        cell.innerHTML = `<div class="cal-day-num">${date.getDate()}</div>`;
+
+        if (dayTermine.length && isCurrentMonth) {
+          if (dayTermine.length <= 2) {
+            dayTermine.forEach(t => {
+              const lbl = document.createElement('span');
+              lbl.className = 'cal-day-event-label';
+              lbl.textContent = t.title;
+              cell.appendChild(lbl);
+            });
+          } else {
+            const dots = document.createElement('div');
+            dots.className = 'cal-day-dots';
+            for (let d = 0; d < Math.min(dayTermine.length, 4); d++) {
+              dots.innerHTML += '<div class="cal-dot"></div>';
+            }
+            cell.appendChild(dots);
+          }
+        }
+
+        cell.addEventListener('click', () => selectDay(dateStr));
+        container.appendChild(cell);
+      }
+    }
+
+    // ── Tag auswählen ────────────────────────────
+    function selectDay(dateStr) {
+      selectedDate = dateStr;
+      renderCalendar();
+
+      const d = new Date(dateStr + 'T00:00:00');
+      const label = d.toLocaleDateString('de-DE', { weekday:'long', day:'numeric', month:'long' });
+      document.getElementById('panel-header').textContent = label;
+
+      const dayTermine = termine.filter(t => t.date === dateStr);
+      const body = document.getElementById('panel-body');
+
+      if (!dayTermine.length) {
+        body.innerHTML = '<div class="termin-panel-empty">Keine Termine an diesem Tag</div>';
+        return;
+      }
+      body.innerHTML = dayTermine.map(t => `
+        <div class="termin-panel-item">
+          <div class="termin-panel-title">${DRV.escapeHtml(t.title)}</div>
+          <div class="termin-panel-meta">
+            ${t.time ? '🕐 ' + DRV.escapeHtml(t.time) : ''}
+            ${t.location ? '&nbsp;&nbsp;📍 ' + DRV.escapeHtml(t.location) : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // ── Alle Termine ─────────────────────────────
+    function renderAllTermine() {
+      const list = document.getElementById('all-termine-list');
+      const upcoming = termine
+        .filter(t => t.date >= toDateStr(today))
+        .slice(0, 8);
+
+      if (!upcoming.length) {
+        list.innerHTML = '<div class="termin-panel-empty">Keine bevorstehenden Termine</div>';
+        return;
+      }
+      list.innerHTML = upcoming.map(t => {
+        const d = new Date(t.date + 'T00:00:00');
+        return `
+          <div class="termin-panel-item" style="cursor:pointer" onclick="jumpTo('${t.date}')">
+            <div class="termin-panel-title">${DRV.escapeHtml(t.title)}</div>
+            <div class="termin-panel-meta">
+              📅 ${d.toLocaleDateString('de-DE', { day:'numeric', month:'long' })}
+              ${t.time ? '&nbsp;🕐 ' + DRV.escapeHtml(t.time) : ''}
+              ${t.location ? '<br>📍 ' + DRV.escapeHtml(t.location) : ''}
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    function jumpTo(dateStr) {
+      const d = new Date(dateStr + 'T00:00:00');
+      viewYear  = d.getFullYear();
+      viewMonth = d.getMonth();
+      renderCalendar();
+      selectDay(dateStr);
+    }
+
+    function toDateStr(d) {
+      return d.getFullYear() + '-' +
+        String(d.getMonth() + 1).padStart(2, '0') + '-' +
+        String(d.getDate()).padStart(2, '0');
+    }
+
+    // ── Daten ────────────────────────────────────
+    DRV.subscribe('termine', (data) => {
+      termine = data;
+      renderCalendar();
+      renderAllTermine();
+    });
+  </script>
+</body>
+</html>

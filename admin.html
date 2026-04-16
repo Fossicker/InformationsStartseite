@@ -25,6 +25,18 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
           Startseite
         </a>
+        <a class="nav-link" href="wir.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Wir
+        </a>
+        <a class="nav-link" href="arbeitsorganisation.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Arbeitsorganisation
+        </a>
+        <a class="nav-link" href="aktuelles.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8z"/></svg>
+          Aktuelles
+        </a>
         <a class="nav-link" href="organigramm.html">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><rect x="2" y="16" width="8" height="5" rx="1"/><rect x="14" y="16" width="8" height="5" rx="1"/><path d="M12 8v4M6 12h12M6 12v4M18 12v4"/></svg>
           Organigramm
@@ -33,7 +45,11 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
           Schwarzes Brett
         </a>
-        <a class="nav-link admin active" href="admin.html">
+        <a class="nav-link" href="kalender.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Kalender
+        </a>
+        <a class="nav-link active admin" href="admin.html">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
           Admin
         </a>
@@ -122,6 +138,67 @@
 
           <div class="admin-list-title">Aktuelle Meldungen</div>
           <div id="ticker-list-admin"></div>
+        </section>
+
+        <!-- ───── Termine ────── -->
+        <section class="admin-section">
+          <h3 class="admin-section-title">Termine</h3>
+          <p class="admin-section-desc">Bevorstehende Termine in der Sidebar anzeigen.</p>
+
+          <div class="form-group">
+            <label for="termin-title">Bezeichnung *</label>
+            <input class="form-input" id="termin-title" placeholder="z.&thinsp;B. Abteilungsbesprechung Q2">
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div class="form-group" style="margin-bottom:0">
+              <label for="termin-date">Datum *</label>
+              <input class="form-input" type="date" id="termin-date">
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label for="termin-time">Uhrzeit</label>
+              <input class="form-input" id="termin-time" placeholder="z.&thinsp;B. 10:00 Uhr">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:14px">
+            <label for="termin-location">Ort / Raum</label>
+            <input class="form-input" id="termin-location" placeholder="z.&thinsp;B. Konferenzraum A3">
+          </div>
+
+          <button class="btn-primary" onclick="createTermin()" style="width:100%">
+            Termin eintragen
+          </button>
+
+          <div class="admin-divider"></div>
+
+          <div class="admin-list-title">Eingetragene Termine</div>
+          <div id="termin-list-admin"></div>
+        </section>
+
+        <!-- ───── Fokusthemen ────── -->
+        <section class="admin-section">
+          <h3 class="admin-section-title">Fokusthemen</h3>
+          <p class="admin-section-desc">Strategische Schwerpunkte in der Sidebar hervorheben.</p>
+
+          <div class="form-group">
+            <label for="fokus-title">Thema *</label>
+            <input class="form-input" id="fokus-title" placeholder="z.&thinsp;B. Digitale Transformation">
+          </div>
+
+          <div class="form-group">
+            <label for="fokus-desc">Kurzbeschreibung</label>
+            <textarea class="form-textarea" id="fokus-desc" placeholder="Kurze Erläuterung zum Thema…" maxlength="300" style="min-height:72px"></textarea>
+          </div>
+
+          <button class="btn-primary" onclick="createFokus()" style="width:100%">
+            Fokusthema hinzufügen
+          </button>
+
+          <div class="admin-divider"></div>
+
+          <div class="admin-list-title">Aktuelle Fokusthemen</div>
+          <div id="fokus-list-admin"></div>
         </section>
 
       </div>
@@ -249,15 +326,187 @@
     }
 
     function clearAll() {
-      if (!confirm('ALLE Inhalte (Blog, Ticker, Schwarzes Brett) werden unwiderruflich gelöscht. Fortfahren?')) return;
+      if (!confirm('ALLE Inhalte (Blog, Ticker, Schwarzes Brett, Termine, Fokusthemen) werden unwiderruflich gelöscht. Fortfahren?')) return;
       DRV.clear('blog');
       DRV.clear('ticker');
       DRV.clear('board');
+      DRV.clear('termine');
+      DRV.clear('fokus');
+    }
+
+    // ════════════════════════════════════════════
+    // Termine
+    // ════════════════════════════════════════════
+    function createTermin() {
+      const title    = document.getElementById('termin-title').value.trim();
+      const date     = document.getElementById('termin-date').value;
+      const time     = document.getElementById('termin-time').value.trim();
+      const location = document.getElementById('termin-location').value.trim();
+
+      if (!title || !date) { alert('Bitte Bezeichnung und Datum ausfüllen.'); return; }
+
+      DRV.add('termine', { title, date, time, location });
+
+      document.getElementById('termin-title').value = '';
+      document.getElementById('termin-date').value = '';
+      document.getElementById('termin-time').value = '';
+      document.getElementById('termin-location').value = '';
+    }
+
+    function deleteTermin(id) {
+      if (!confirm('Diesen Termin wirklich löschen?')) return;
+      DRV.remove('termine', id);
+    }
+
+    function renderTerminList(items) {
+      const list = document.getElementById('termin-list-admin');
+      if (!items.length) {
+        list.innerHTML = '<div class="empty-state" style="padding:20px"><p>Noch keine Termine.</p></div>';
+        return;
+      }
+      list.innerHTML = items.map(t => `
+        <div class="admin-item" draggable="true" data-id="${t.id}">
+          <div class="drag-handle" title="Ziehen zum Sortieren">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="5" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="9" cy="19" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="15" cy="5" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="15" cy="19" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <div class="admin-item-body">
+            <div class="admin-item-title">${DRV.escapeHtml(t.title)}</div>
+            <div class="admin-item-meta">
+              📅 ${DRV.escapeHtml(t.date)}
+              ${t.time ? ` · 🕐 ${DRV.escapeHtml(t.time)}` : ''}
+              ${t.location ? ` · 📍 ${DRV.escapeHtml(t.location)}` : ''}
+            </div>
+          </div>
+          <button class="admin-item-delete" onclick="deleteTermin('${t.id}')">Löschen</button>
+        </div>
+      `).join('');
+      makeDraggable(list, 'termine');
+    }
+
+    // ════════════════════════════════════════════
+    // Fokusthemen
+    // ════════════════════════════════════════════
+    function createFokus() {
+      const title = document.getElementById('fokus-title').value.trim();
+      const description = document.getElementById('fokus-desc').value.trim();
+
+      if (!title) { alert('Bitte ein Thema eingeben.'); return; }
+
+      DRV.add('fokus', { title, description });
+
+      document.getElementById('fokus-title').value = '';
+      document.getElementById('fokus-desc').value = '';
+    }
+
+    function deleteFokus(id) {
+      if (!confirm('Dieses Fokusthema wirklich löschen?')) return;
+      DRV.remove('fokus', id);
+    }
+
+    function renderFokusList(items) {
+      const list = document.getElementById('fokus-list-admin');
+      if (!items.length) {
+        list.innerHTML = '<div class="empty-state" style="padding:20px"><p>Noch keine Fokusthemen.</p></div>';
+        return;
+      }
+      list.innerHTML = items.map(f => `
+        <div class="admin-item" draggable="true" data-id="${f.id}">
+          <div class="drag-handle" title="Ziehen zum Sortieren">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="5" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="9" cy="12" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="9" cy="19" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="15" cy="5" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="15" cy="12" r="1" fill="currentColor" stroke="none"/>
+              <circle cx="15" cy="19" r="1" fill="currentColor" stroke="none"/>
+            </svg>
+          </div>
+          <div class="admin-item-body">
+            <div class="admin-item-title">${DRV.escapeHtml(f.title)}</div>
+            ${f.description ? `<div class="admin-item-meta">${DRV.escapeHtml(f.description)}</div>` : ''}
+          </div>
+          <button class="admin-item-delete" onclick="deleteFokus('${f.id}')">Löschen</button>
+        </div>
+      `).join('');
+      makeDraggable(list, 'fokus');
+    }
+
+    // ════════════════════════════════════════════
+    // Drag & Drop – generische Implementierung
+    // ════════════════════════════════════════════
+    function makeDraggable(container, collectionKey) {
+      let dragSrc = null;
+
+      container.querySelectorAll('.admin-item[draggable]').forEach(item => {
+
+        item.addEventListener('dragstart', (e) => {
+          dragSrc = item;
+          item.classList.add('dragging');
+          e.dataTransfer.effectAllowed = 'move';
+          e.dataTransfer.setData('text/plain', item.dataset.id);
+        });
+
+        item.addEventListener('dragend', () => {
+          item.classList.remove('dragging');
+          container.querySelectorAll('.admin-item').forEach(i => i.classList.remove('drag-over'));
+        });
+
+        item.addEventListener('dragover', (e) => {
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'move';
+          if (item !== dragSrc) {
+            container.querySelectorAll('.admin-item').forEach(i => i.classList.remove('drag-over'));
+            item.classList.add('drag-over');
+          }
+        });
+
+        item.addEventListener('dragleave', () => {
+          item.classList.remove('drag-over');
+        });
+
+        item.addEventListener('drop', (e) => {
+          e.preventDefault();
+          item.classList.remove('drag-over');
+          if (!dragSrc || dragSrc === item) return;
+
+          // DOM-Reihenfolge ermitteln und im Container neu anordnen
+          const allItems = [...container.querySelectorAll('.admin-item')];
+          const srcIdx  = allItems.indexOf(dragSrc);
+          const destIdx = allItems.indexOf(item);
+
+          if (srcIdx < destIdx) {
+            container.insertBefore(dragSrc, item.nextSibling);
+          } else {
+            container.insertBefore(dragSrc, item);
+          }
+
+          // Neue Reihenfolge der IDs aus dem DOM lesen
+          const newOrder = [...container.querySelectorAll('.admin-item')]
+            .map(el => el.dataset.id);
+
+          // Aktuelle Daten in neuer Reihenfolge zusammenstellen
+          const currentData = DRV.getAll(collectionKey);
+          const reordered = newOrder
+            .map(id => currentData.find(d => d.id === id))
+            .filter(Boolean);
+
+          DRV.reorder(collectionKey, reordered);
+        });
+      });
     }
 
     // ── Listener registrieren ─────────────────
-    DRV.subscribe('blog',   renderBlogList);
-    DRV.subscribe('ticker', renderTickerList);
+    DRV.subscribe('blog',    renderBlogList);
+    DRV.subscribe('ticker',  renderTickerList);
+    DRV.subscribe('termine', renderTerminList);
+    DRV.subscribe('fokus',   renderFokusList);
   </script>
 
 </body>
