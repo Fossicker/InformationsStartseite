@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Startseite – DRV Bund Abteilungsportal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-top">
+      <a class="logo-area" href="index.html">
+        <img class="logo-image" src="logo.svg" alt="DRV Bund Logo">
+        <div class="logo-text">
+          <h1>Informationsportal</h1>
+          <span>Deutsche Rentenversicherung Bund – Abteilung</span>
+        </div>
+      </a>
+    </div>
+    <nav class="header-nav">
+      <div class="nav-inner">
+        <a class="nav-link active" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Startseite
+        </a>
+        <a class="nav-link" href="organigramm.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><rect x="2" y="16" width="8" height="5" rx="1"/><rect x="14" y="16" width="8" height="5" rx="1"/><path d="M12 8v4M6 12h12M6 12v4M18 12v4"/></svg>
+          Organigramm
+        </a>
+        <a class="nav-link" href="schwarzes-brett.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          Schwarzes Brett
+        </a>
+        <a class="nav-link admin" href="admin.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Admin
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <div class="main-content">
+      <div class="page-title-section">
+        <h2 class="page-title">Aktuelles</h2>
+        <p class="page-subtitle">Neuigkeiten und Informationen aus der Abteilung</p>
+      </div>
+
+      <div class="home-layout">
+        <!-- Blog -->
+        <div class="home-main">
+          <div class="blog-grid" id="blog-grid">
+            <div class="empty-state"><p>Wird geladen…</p></div>
+          </div>
+        </div>
+
+        <!-- Ticker -->
+        <aside class="home-sidebar">
+          <div class="ticker-bar">
+            <div class="ticker-label">Aktuell</div>
+            <ul class="ticker-list" id="ticker-list">
+              <li class="ticker-list-item">Wird geladen…</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <strong>DRV Bund</strong> · Abteilungs-Informationsportal · © 2026 · Interne Nutzung
+  </footer>
+
+  <!-- Lokaler Datenspeicher -->
+  <script src="data-store.js"></script>
+
+  <script>
+    // ── Blog rendern ──────────────────────────
+    function renderBlog(posts) {
+      const grid = document.getElementById('blog-grid');
+
+      if (!posts.length) {
+        grid.innerHTML = '<div class="empty-state"><p>Noch keine Beiträge vorhanden.</p></div>';
+        return;
+      }
+
+      grid.innerHTML = posts.map((p, i) => i === 0
+        ? renderFeatured(p)
+        : renderCard(p)
+      ).join('');
+    }
+
+    function renderFeatured(p) {
+      return `
+        <div class="blog-card featured">
+          <div class="featured-accent">
+            <div class="blog-card-category">${DRV.escapeHtml(p.category || 'Allgemein')}</div>
+            <h3 class="blog-card-title">${DRV.escapeHtml(p.title)}</h3>
+            <p class="blog-card-excerpt">${DRV.escapeHtml(p.excerpt)}</p>
+            <div class="blog-card-meta">
+              <span>${DRV.escapeHtml(p.author || '')}</span>
+              <span>${DRV.escapeHtml(p.readTime || '')}</span>
+            </div>
+            <div class="blog-card-cta">Weiterlesen →</div>
+          </div>
+          <div class="featured-side">
+            <div style="margin-bottom:20px">
+              <div class="section-label">Abteilung in Zahlen</div>
+              <div class="featured-stats">
+                <div class="stat-card"><div class="stat-num">142</div><div class="stat-label">Mitarbeitende</div></div>
+                <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Dezernate</div></div>
+                <div class="stat-card"><div class="stat-num">7</div><div class="stat-label">Referate</div></div>
+                <div class="stat-card"><div class="stat-num">23</div><div class="stat-label">Projekte aktiv</div></div>
+              </div>
+            </div>
+            <div style="font-size:12px;color:var(--gray-400)">${DRV.formatDate(p.createdAt)}</div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderCard(p) {
+      return `
+        <div class="blog-card">
+          <div class="blog-card-category">${DRV.escapeHtml(p.category || 'Allgemein')}</div>
+          <h3 class="blog-card-title">${DRV.escapeHtml(p.title)}</h3>
+          <p class="blog-card-excerpt">${DRV.escapeHtml(p.excerpt)}</p>
+          <div class="blog-card-meta">
+            <span>${DRV.escapeHtml(p.author || '')}</span>
+            <span>${DRV.escapeHtml(p.readTime || '')}</span>
+          </div>
+          <div class="blog-card-cta">Weiterlesen →</div>
+        </div>
+      `;
+    }
+
+    // ── Ticker rendern ────────────────────────
+    function renderTicker(items) {
+      const list = document.getElementById('ticker-list');
+      if (!items.length) {
+        list.innerHTML = '<li class="ticker-list-item" style="color:var(--gray-400)">Keine aktuellen Meldungen</li>';
+        return;
+      }
+      list.innerHTML = items.map(item =>
+        `<li class="ticker-list-item">${DRV.escapeHtml(item.text)}</li>`
+      ).join('');
+    }
+
+    // ── Listener registrieren ─────────────────
+    DRV.subscribe('blog',   renderBlog);
+    DRV.subscribe('ticker', renderTicker);
+  </script>
+
+</body>
+</html>

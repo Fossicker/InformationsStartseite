@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Organigramm – DRV Bund Abteilungsportal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-top">
+      <a class="logo-area" href="index.html">
+        <img class="logo-image" src="logo.svg" alt="DRV Bund Logo">
+        <div class="logo-text">
+          <h1>Informationsportal</h1>
+          <span>Deutsche Rentenversicherung Bund – Abteilung</span>
+        </div>
+      </a>
+    </div>
+    <nav class="header-nav">
+      <div class="nav-inner">
+        <a class="nav-link" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Startseite
+        </a>
+        <a class="nav-link active" href="organigramm.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><rect x="2" y="16" width="8" height="5" rx="1"/><rect x="14" y="16" width="8" height="5" rx="1"/><path d="M12 8v4M6 12h12M6 12v4M18 12v4"/></svg>
+          Organigramm
+        </a>
+        <a class="nav-link" href="schwarzes-brett.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          Schwarzes Brett
+        </a>
+        <a class="nav-link admin" href="admin.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Admin
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <div class="main-content">
+      <div class="page-title-section">
+        <h2 class="page-title">Organigramm</h2>
+        <p class="page-subtitle">Organisationsstruktur der Abteilung</p>
+      </div>
+
+      <div class="org-tree">
+        <!-- Abteilungsleitung -->
+        <div class="org-node root">
+          <div class="org-node-name">Abteilungsleitung</div>
+          <div class="org-node-person">Dr. Klaus Berger</div>
+          <div class="org-node-role" style="opacity:.5;color:var(--lime)">Abteilungsleiter</div>
+        </div>
+        <div class="org-connector"></div>
+        <div class="org-hline"></div>
+
+        <!-- Dezernate -->
+        <div class="org-children">
+
+          <!-- Dezernat 1 -->
+          <div class="org-branch">
+            <div class="org-connector"></div>
+            <div class="org-node">
+              <div class="org-node-name">Dezernat 1</div>
+              <div class="org-node-person">Martina Schreiber</div>
+              <div class="org-node-role">Dezernentin – Grundsatz &amp; Recht</div>
+            </div>
+            <div class="org-sub-children">
+              <div class="org-connector" style="height:12px"></div>
+              <div class="org-sub-node">
+                <div class="org-sub-name">Referat 1.1</div>
+                <div class="org-sub-person">Anna Lehmann · Referatsleiterin</div>
+              </div>
+              <div class="org-sub-node">
+                <div class="org-sub-name">Referat 1.2</div>
+                <div class="org-sub-person">Peter Braun · Referatsleiter</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dezernat 2 -->
+          <div class="org-branch">
+            <div class="org-connector"></div>
+            <div class="org-node">
+              <div class="org-node-name">Dezernat 2</div>
+              <div class="org-node-person">Thomas Krüger</div>
+              <div class="org-node-role">Dezernent – IT &amp; Digitales</div>
+            </div>
+            <div class="org-sub-children">
+              <div class="org-connector" style="height:12px"></div>
+              <div class="org-sub-node">
+                <div class="org-sub-name">Referat 2.1</div>
+                <div class="org-sub-person">Lena Fischer · Referatsleiterin</div>
+              </div>
+              <div class="org-sub-node">
+                <div class="org-sub-name">Referat 2.2</div>
+                <div class="org-sub-person">Markus Wolf · Referatsleiter</div>
+              </div>
+              <div class="org-sub-node">
+                <div class="org-sub-name">Referat 2.3</div>
+                <div class="org-sub-person">Sabine Engel · Referatsleiterin</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dezernat 3 -->
+          <div class="org-branch">
+            <div class="org-connector"></div>
+            <div class="org-node">
+              <div class="org-node-name">Dezernat 3</div>
+              <div class="org-node-person">Sandra Hoffmann</div>
+              <div class="org-node-role">Dezernentin – Personal &amp; Organisation</div>
+            </div>
+            <div class="org-sub-children">
+              <div class="org-connector" style="height:12px"></div>
+              <div class="org-sub-node">
+                <div class="org-sub-name">Referat 3.1</div>
+                <div class="org-sub-person">Julia Meier · Referatsleiterin</div>
+              </div>
+              <div class="org-sub-node">
+                <div class="org-sub-name">Referat 3.2</div>
+                <div class="org-sub-person">Kai Richter · Referatsleiter</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <strong>DRV Bund</strong> · Abteilungs-Informationsportal · © 2026 · Interne Nutzung
+  </footer>
+
+</body>
+</html>

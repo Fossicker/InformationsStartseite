@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin – DRV Bund Abteilungsportal</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-top">
+      <a class="logo-area" href="index.html">
+        <img class="logo-image" src="logo.svg" alt="DRV Bund Logo">
+        <div class="logo-text">
+          <h1>Informationsportal</h1>
+          <span>Deutsche Rentenversicherung Bund – Abteilung</span>
+        </div>
+      </a>
+    </div>
+    <nav class="header-nav">
+      <div class="nav-inner">
+        <a class="nav-link" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Startseite
+        </a>
+        <a class="nav-link" href="organigramm.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><rect x="2" y="16" width="8" height="5" rx="1"/><rect x="14" y="16" width="8" height="5" rx="1"/><path d="M12 8v4M6 12h12M6 12v4M18 12v4"/></svg>
+          Organigramm
+        </a>
+        <a class="nav-link" href="schwarzes-brett.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          Schwarzes Brett
+        </a>
+        <a class="nav-link admin active" href="admin.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Admin
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <div class="main-content">
+      <div class="page-title-section">
+        <h2 class="page-title">Verwaltung</h2>
+        <p class="page-subtitle">Blog-Beiträge und Newsticker-Meldungen pflegen</p>
+      </div>
+
+      <!-- Hinweis -->
+      <div class="admin-banner">
+        💾 <strong>Lokaler Speicher:</strong> Alle Inhalte werden im LocalStorage
+        deines Browsers gespeichert. Sie sind <strong>nur auf diesem Gerät</strong>
+        in <strong>diesem Browser</strong> sichtbar – nicht für andere Personen.
+        Beim Leeren der Browserdaten gehen die Inhalte verloren.
+      </div>
+
+      <!-- Zwei Spalten: Blog + Ticker -->
+      <div class="admin-grid">
+
+        <!-- ───── Blog ────── -->
+        <section class="admin-section">
+          <h3 class="admin-section-title">Blog-Beiträge</h3>
+          <p class="admin-section-desc">Neue Beiträge erscheinen sofort auf der Startseite.</p>
+
+          <div class="form-group">
+            <label for="blog-title">Titel *</label>
+            <input class="form-input" id="blog-title" placeholder="z.&thinsp;B. Wichtige Information für alle Mitarbeitenden">
+          </div>
+
+          <div class="form-group">
+            <label for="blog-excerpt">Kurztext / Anreißer *</label>
+            <textarea class="form-textarea" id="blog-excerpt" placeholder="Worum geht es im Beitrag?" maxlength="500"></textarea>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+            <div class="form-group" style="margin-bottom:0">
+              <label for="blog-author">Autor*in *</label>
+              <input class="form-input" id="blog-author" placeholder="Vor- und Nachname">
+            </div>
+            <div class="form-group" style="margin-bottom:0">
+              <label for="blog-readtime">Lesezeit</label>
+              <input class="form-input" id="blog-readtime" placeholder="z.&thinsp;B. 4 Min.">
+            </div>
+          </div>
+
+          <div class="form-group" style="margin-top:14px">
+            <label for="blog-category">Kategorie *</label>
+            <select class="form-select" id="blog-category"></select>
+          </div>
+
+          <button class="btn-primary" onclick="createBlogPost()" style="width:100%">
+            Beitrag veröffentlichen
+          </button>
+
+          <div class="admin-divider"></div>
+
+          <div class="admin-list-title">Aktuelle Beiträge</div>
+          <div id="blog-list"></div>
+        </section>
+
+        <!-- ───── Newsticker ────── -->
+        <section class="admin-section">
+          <h3 class="admin-section-title">Newsticker</h3>
+          <p class="admin-section-desc">Kurze Meldungen für die Sidebar auf der Startseite.</p>
+
+          <div class="form-group">
+            <label for="ticker-text">Meldung *</label>
+            <textarea class="form-textarea" id="ticker-text" placeholder="z.&thinsp;B. 📌 Betriebsversammlung am 24. April um 14:00 Uhr im Großen Saal" maxlength="200"></textarea>
+            <div style="font-size:11px;color:var(--gray-400);margin-top:4px">
+              Tipp: Nutze ein Emoji am Anfang, um die Meldung kategorisch zu kennzeichnen.
+            </div>
+          </div>
+
+          <button class="btn-primary" onclick="createTickerItem()" style="width:100%">
+            Meldung veröffentlichen
+          </button>
+
+          <div class="admin-divider"></div>
+
+          <div class="admin-list-title">Aktuelle Meldungen</div>
+          <div id="ticker-list-admin"></div>
+        </section>
+
+      </div>
+
+      <!-- Datenverwaltung -->
+      <div style="margin-top:32px;padding:24px;background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-lg)">
+        <h3 class="admin-section-title" style="margin-bottom:6px">Datenverwaltung</h3>
+        <p class="admin-section-desc" style="margin-bottom:16px">
+          Alle Daten zurücksetzen oder die ursprünglichen Demo-Inhalte wiederherstellen.
+        </p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap">
+          <button class="btn-ghost" onclick="resetToDemo()">🔄 Auf Demo-Inhalte zurücksetzen</button>
+          <button class="btn-ghost" onclick="clearAll()" style="color:var(--red);border-color:var(--red)">🗑️ Alle Daten löschen</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <strong>DRV Bund</strong> · Abteilungs-Informationsportal · © 2026 · Interne Nutzung
+  </footer>
+
+  <!-- Lokaler Datenspeicher -->
+  <script src="data-store.js"></script>
+
+  <script>
+    // ── Kategorie-Dropdown füllen ─────────────
+    document.getElementById('blog-category').innerHTML =
+      DRV.BLOG_CATEGORIES.map(c => `<option value="${c}">${c}</option>`).join('');
+
+    // ════════════════════════════════════════════
+    // Blog
+    // ════════════════════════════════════════════
+    function createBlogPost() {
+      const title    = document.getElementById('blog-title').value.trim();
+      const excerpt  = document.getElementById('blog-excerpt').value.trim();
+      const author   = document.getElementById('blog-author').value.trim();
+      const readTime = document.getElementById('blog-readtime').value.trim() || '— Min.';
+      const category = document.getElementById('blog-category').value;
+
+      if (!title || !excerpt || !author) {
+        alert('Bitte Titel, Kurztext und Autor*in ausfüllen.');
+        return;
+      }
+
+      DRV.add('blog', { title, excerpt, author, readTime, category });
+
+      document.getElementById('blog-title').value = '';
+      document.getElementById('blog-excerpt').value = '';
+      document.getElementById('blog-author').value = '';
+      document.getElementById('blog-readtime').value = '';
+    }
+
+    function deleteBlogPost(id) {
+      if (!confirm('Diesen Beitrag wirklich löschen?')) return;
+      DRV.remove('blog', id);
+    }
+
+    function renderBlogList(posts) {
+      const list = document.getElementById('blog-list');
+      if (!posts.length) {
+        list.innerHTML = '<div class="empty-state" style="padding:20px"><p>Noch keine Beiträge.</p></div>';
+        return;
+      }
+      list.innerHTML = posts.map(p => `
+        <div class="admin-item">
+          <div class="admin-item-body">
+            <div class="admin-item-title">${DRV.escapeHtml(p.title)}</div>
+            <div class="admin-item-meta">
+              ${DRV.escapeHtml(p.category || '–')} ·
+              ${DRV.escapeHtml(p.author || '–')} ·
+              ${DRV.formatDate(p.createdAt)}
+            </div>
+          </div>
+          <button class="admin-item-delete" onclick="deleteBlogPost('${p.id}')">Löschen</button>
+        </div>
+      `).join('');
+    }
+
+    // ════════════════════════════════════════════
+    // Newsticker
+    // ════════════════════════════════════════════
+    function createTickerItem() {
+      const text = document.getElementById('ticker-text').value.trim();
+
+      if (!text) {
+        alert('Bitte einen Text eingeben.');
+        return;
+      }
+
+      DRV.add('ticker', { text });
+      document.getElementById('ticker-text').value = '';
+    }
+
+    function deleteTickerItem(id) {
+      if (!confirm('Diese Meldung wirklich löschen?')) return;
+      DRV.remove('ticker', id);
+    }
+
+    function renderTickerList(items) {
+      const list = document.getElementById('ticker-list-admin');
+      if (!items.length) {
+        list.innerHTML = '<div class="empty-state" style="padding:20px"><p>Noch keine Meldungen.</p></div>';
+        return;
+      }
+      list.innerHTML = items.map(item => `
+        <div class="admin-item">
+          <div class="admin-item-body">
+            <div class="admin-item-title">${DRV.escapeHtml(item.text)}</div>
+            <div class="admin-item-meta">${DRV.formatDate(item.createdAt)}</div>
+          </div>
+          <button class="admin-item-delete" onclick="deleteTickerItem('${item.id}')">Löschen</button>
+        </div>
+      `).join('');
+    }
+
+    // ════════════════════════════════════════════
+    // Datenverwaltung
+    // ════════════════════════════════════════════
+    function resetToDemo() {
+      if (!confirm('Alle aktuellen Daten werden überschrieben. Fortfahren?')) return;
+      DRV.resetToDemo();
+    }
+
+    function clearAll() {
+      if (!confirm('ALLE Inhalte (Blog, Ticker, Schwarzes Brett) werden unwiderruflich gelöscht. Fortfahren?')) return;
+      DRV.clear('blog');
+      DRV.clear('ticker');
+      DRV.clear('board');
+    }
+
+    // ── Listener registrieren ─────────────────
+    DRV.subscribe('blog',   renderBlogList);
+    DRV.subscribe('ticker', renderTickerList);
+  </script>
+
+</body>
+</html>

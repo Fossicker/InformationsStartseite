@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 40" width="120" height="40">
+  <!-- Hintergrund-Quadrat mit DRV-Kürzel -->
+  <rect x="0" y="0" width="40" height="40" rx="4" fill="#D3DB2B"/>
+  <text x="20" y="27"
+        font-family="Georgia, 'Playfair Display', serif"
+        font-size="16"
+        font-weight="700"
+        fill="#073163"
+        text-anchor="middle">DRV</text>
+
+  <!-- Schriftzug rechts daneben -->
+  <text x="50" y="18"
+        font-family="Georgia, 'Playfair Display', serif"
+        font-size="13"
+        font-weight="700"
+        fill="#073163">Bund</text>
+  <text x="50" y="32"
+        font-family="Arial, sans-serif"
+        font-size="8"
+        font-weight="500"
+        fill="#073163"
+        opacity="0.6">Abteilung</text>
+</svg>
