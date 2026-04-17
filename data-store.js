@@ -200,7 +200,7 @@ Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed 
 
   // ── Erstinitialisierung mit Demo-Daten ─────
   function seedIfEmpty() {
-    if (localStorage.getItem(SEED_FLAG)) return;
+    if (localStorage.getItem(SEED_FLAG) && getAll('blog').length > 0) return;
     // Ältere Seed-Flags entfernen
     localStorage.removeItem('drv_seeded_v1');
     localStorage.removeItem('drv_seeded_v2');
