@@ -84,7 +84,12 @@
 
           <div class="form-group">
             <label for="blog-excerpt">Kurztext / Anreißer *</label>
-            <textarea class="form-textarea" id="blog-excerpt" placeholder="Worum geht es im Beitrag?" maxlength="500"></textarea>
+            <textarea class="form-textarea" id="blog-excerpt" placeholder="Worum geht es im Beitrag? (wird in der Übersicht angezeigt)" maxlength="500"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="blog-body">Volltext</label>
+            <textarea class="form-textarea" id="blog-body" placeholder="Der gesamte Beitragstext. Mehrere Absätze durch Leerzeile trennen." style="min-height:140px"></textarea>
           </div>
 
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
@@ -238,6 +243,7 @@
     function createBlogPost() {
       const title    = document.getElementById('blog-title').value.trim();
       const excerpt  = document.getElementById('blog-excerpt').value.trim();
+      const body     = document.getElementById('blog-body').value.trim();
       const author   = document.getElementById('blog-author').value.trim();
       const readTime = document.getElementById('blog-readtime').value.trim() || '— Min.';
       const category = document.getElementById('blog-category').value;
@@ -247,10 +253,11 @@
         return;
       }
 
-      DRV.add('blog', { title, excerpt, author, readTime, category });
+      DRV.add('blog', { title, excerpt, body, author, readTime, category });
 
       document.getElementById('blog-title').value = '';
       document.getElementById('blog-excerpt').value = '';
+      document.getElementById('blog-body').value = '';
       document.getElementById('blog-author').value = '';
       document.getElementById('blog-readtime').value = '';
     }

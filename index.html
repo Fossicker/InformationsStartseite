@@ -150,7 +150,7 @@
 
     function renderFeatured(p) {
       return `
-        <div class="blog-card featured-simple">
+        <a class="blog-card featured-simple" href="beitrag.html?id=${encodeURIComponent(p.id)}">
           <h3 class="blog-card-title">${DRV.escapeHtml(p.title)}</h3>
           <p class="blog-card-excerpt">${DRV.escapeHtml(p.excerpt)}</p>
           <div class="blog-card-meta">
@@ -158,13 +158,13 @@
             <span>${DRV.escapeHtml(p.readTime || '')}</span>
           </div>
           <div class="blog-card-cta">Weiterlesen →</div>
-        </div>
+        </a>
       `;
     }
 
     function renderCard(p) {
       return `
-        <div class="blog-card">
+        <a class="blog-card" href="beitrag.html?id=${encodeURIComponent(p.id)}">
           <div class="blog-card-category">${DRV.escapeHtml(p.category || 'Allgemein')}</div>
           <h3 class="blog-card-title">${DRV.escapeHtml(p.title)}</h3>
           <p class="blog-card-excerpt">${DRV.escapeHtml(p.excerpt)}</p>
@@ -173,7 +173,7 @@
             <span>${DRV.escapeHtml(p.readTime || '')}</span>
           </div>
           <div class="blog-card-cta">Weiterlesen →</div>
-        </div>
+        </a>
       `;
     }
 
@@ -299,7 +299,7 @@
       DRV.getAll('blog').forEach(p => items.push({
         title: p.title,
         body: [p.excerpt, p.author, p.category].filter(Boolean).join(' '),
-        url: 'index.html', type: 'Beitrag', date: p.createdAt,
+        url: 'beitrag.html?id=' + encodeURIComponent(p.id), type: 'Beitrag', date: p.createdAt,
       }));
 
       DRV.getAll('ticker').forEach(t => items.push({

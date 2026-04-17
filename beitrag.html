@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beitrag – DRV Bund Abteilungsportal</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .beitrag-wrap {
+      max-width: 780px;
+      margin: 0 auto;
+    }
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      text-decoration: none;
+      margin-bottom: 24px;
+      padding: 6px 12px 6px 4px;
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+    .back-link:hover {
+      background: var(--ice);
+      transform: translateX(-2px);
+    }
+    .back-link svg { width: 16px; height: 16px; }
+
+    .beitrag-category {
+      display: inline-flex;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--navy-light);
+      background: var(--ice);
+      padding: 5px 12px;
+      border-radius: 3px;
+      margin-bottom: 20px;
+    }
+
+    .beitrag-title {
+      font-family: var(--font-display);
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 16px;
+      letter-spacing: -.5px;
+    }
+    @media (max-width: 640px) { .beitrag-title { font-size: 26px; } }
+
+    .beitrag-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 18px;
+      font-size: 13px;
+      color: var(--gray-600);
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--gray-200);
+      margin-bottom: 32px;
+    }
+    .beitrag-meta .separator {
+      color: var(--gray-400);
+    }
+    .beitrag-author {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .beitrag-avatar {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: var(--ice-dark);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-weight: 700; font-size: 13px;
+      color: var(--navy);
+    }
+
+    .beitrag-excerpt {
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--gray-800);
+      margin-bottom: 28px;
+      padding-left: 18px;
+      border-left: 4px solid var(--lime);
+      font-weight: 500;
+    }
+
+    .beitrag-body {
+      font-size: 16px;
+      line-height: 1.75;
+      color: var(--gray-800);
+    }
+    .beitrag-body p {
+      margin-bottom: 18px;
+    }
+
+    .beitrag-footer {
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid var(--gray-200);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      color: var(--gray-600);
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .not-found {
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .not-found-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+    .not-found h3 {
+      font-family: var(--font-display);
+      font-size: 22px;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .not-found p {
+      color: var(--gray-600);
+      margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-top">
+      <a class="logo-area" href="index.html">
+        <img class="logo-image" src="logo.svg" alt="DRV Bund Logo">
+        <div class="logo-text">
+          <h1>Informationsportal</h1>
+          <span>Deutsche Rentenversicherung Bund – Abteilung</span>
+        </div>
+      </a>
+    </div>
+    <nav class="header-nav">
+      <div class="nav-inner">
+        <a class="nav-link active" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          Aktuelles
+        </a>
+        <a class="nav-link" href="wir.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          Wir
+        </a>
+        <a class="nav-link" href="arbeitsorganisation.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Arbeitsorganisation
+        </a>
+        <a class="nav-link" href="organigramm.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><rect x="2" y="16" width="8" height="5" rx="1"/><rect x="14" y="16" width="8" height="5" rx="1"/><path d="M12 8v4M6 12h12M6 12v4M18 12v4"/></svg>
+          Organigramm
+        </a>
+        <a class="nav-link" href="schwarzes-brett.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+          Schwarzes Brett
+        </a>
+        <a class="nav-link" href="kalender.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          Kalender
+        </a>
+        <a class="nav-link admin" href="admin.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          Admin
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <div class="main-content">
+      <div class="beitrag-wrap" id="beitrag-content">
+        <div class="empty-state"><p>Wird geladen…</p></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <strong>DRV Bund</strong> · Abteilungs-Informationsportal · © 2026 · Interne Nutzung
+  </footer>
+
+  <!-- Lokaler Datenspeicher -->
+  <script src="data-store.js"></script>
+
+  <script>
+    // ── ID aus URL holen ──────────────────────
+    const params = new URLSearchParams(window.location.search);
+    const postId = params.get('id');
+
+    // ── Initialen für Avatar ───────────────────
+    function initials(name) {
+      if (!name) return '?';
+      return name.split(/\s+/).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+    }
+
+    // ── Rendern ────────────────────────────────
+    function render(posts) {
+      const container = document.getElementById('beitrag-content');
+      const post = posts.find(p => p.id === postId);
+
+      if (!post) {
+        container.innerHTML = `
+          <a class="back-link" href="index.html">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+            Zur Übersicht
+          </a>
+          <div class="not-found">
+            <div class="not-found-icon">🔍</div>
+            <h3>Beitrag nicht gefunden</h3>
+            <p>Der angeforderte Beitrag existiert nicht oder wurde gelöscht.</p>
+          </div>`;
+        document.title = 'Nicht gefunden – DRV Bund Abteilungsportal';
+        return;
+      }
+
+      // Absätze aus Volltext erzeugen; Fallback: Excerpt wiederholen
+      const bodyText = (post.body || post.excerpt || '').trim();
+      const paragraphs = bodyText
+        ? bodyText.split(/\n\s*\n/).map(p =>
+            `<p>${DRV.escapeHtml(p).replace(/\n/g, '<br>')}</p>`
+          ).join('')
+        : `<p style="color:var(--gray-400);font-style:italic">Kein weiterer Text vorhanden.</p>`;
+
+      document.title = post.title + ' – DRV Bund Abteilungsportal';
+
+      container.innerHTML = `
+        <a class="back-link" href="index.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+          Zur Übersicht
+        </a>
+
+        <article>
+          ${post.category ? `<div class="beitrag-category">${DRV.escapeHtml(post.category)}</div>` : ''}
+          <h1 class="beitrag-title">${DRV.escapeHtml(post.title)}</h1>
+
+          <div class="beitrag-meta">
+            ${post.author ? `
+              <div class="beitrag-author">
+                <div class="beitrag-avatar">${DRV.escapeHtml(initials(post.author))}</div>
+                <span>${DRV.escapeHtml(post.author)}</span>
+              </div>
+              <span class="separator">·</span>` : ''
+            }
+            <span>📅 ${DRV.escapeHtml(DRV.formatDate(post.createdAt))}</span>
+            ${post.readTime ? `
+              <span class="separator">·</span>
+              <span>🕐 ${DRV.escapeHtml(post.readTime)}</span>` : ''
+            }
+          </div>
+
+          <div class="beitrag-excerpt">${DRV.escapeHtml(post.excerpt)}</div>
+
+          <div class="beitrag-body">${paragraphs}</div>
+
+          <div class="beitrag-footer">
+            <a class="back-link" href="index.html" style="margin:0">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+              Alle Beiträge
+            </a>
+            <span>Veröffentlicht ${DRV.formatDate(post.createdAt)}</span>
+          </div>
+        </article>
+      `;
+    }
+
+    DRV.subscribe('blog', render);
+  </script>
+
+</body>
+</html>

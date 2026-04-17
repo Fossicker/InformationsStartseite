@@ -346,6 +346,7 @@ a.fokus-link:hover .fokus-link-icon {
    Blog Cards
    ═══════════════════════════════════════════ */
 .blog-card {
+  display: block;
   background: var(--white);
   border-radius: var(--radius-lg);
   padding: 28px;
@@ -355,6 +356,8 @@ a.fokus-link:hover .fokus-link-icon {
   cursor: pointer;
   position: relative;
   overflow: hidden;
+  text-decoration: none;
+  color: inherit;
 }
 .blog-card::before {
   content: '';

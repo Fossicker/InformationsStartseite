@@ -18,14 +18,23 @@
     termine: 'drv_termine',
     fokus:   'drv_fokusthemen',
   };
-  const SEED_FLAG = 'drv_seeded_v3';
+  const SEED_FLAG = 'drv_seeded_v4';
 
   // ── Demo-Seed (einmalig beim ersten Laden) ──
+  const LOREM_BODY = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+
+Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.`;
+
   const DEMO_BLOG = [
     {
       id: 'seed_b1',
       title: 'Lorem ipsum dolor sit amet consectetur',
       excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
+      body: LOREM_BODY,
       author: 'Lorem Ipsum',
       readTime: '4 Min.',
       category: 'Lorem',
@@ -35,6 +44,7 @@
       id: 'seed_b2',
       title: 'Ut enim ad minim veniam quis nostrud',
       excerpt: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.',
+      body: LOREM_BODY,
       author: 'Dolor Amet',
       readTime: '3 Min.',
       category: 'Ipsum',
@@ -44,6 +54,7 @@
       id: 'seed_b3',
       title: 'Excepteur sint occaecat cupidatat non proident',
       excerpt: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore.',
+      body: LOREM_BODY,
       author: 'Consectetur Sit',
       readTime: '6 Min.',
       category: 'Dolor',
@@ -53,6 +64,7 @@
       id: 'seed_b4',
       title: 'Nemo enim ipsam voluptatem quia voluptas',
       excerpt: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt.',
+      body: LOREM_BODY,
       author: 'Adipiscing Elit',
       readTime: '2 Min.',
       category: 'Amet',
@@ -192,6 +204,7 @@
     // Ältere Seed-Flags entfernen
     localStorage.removeItem('drv_seeded_v1');
     localStorage.removeItem('drv_seeded_v2');
+    localStorage.removeItem('drv_seeded_v3');
     saveAll('blog', DEMO_BLOG);
     saveAll('ticker', DEMO_TICKER);
     saveAll('board', DEMO_ADS);
