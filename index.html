@@ -82,40 +82,44 @@
 
       <!-- ── Normaler Inhalt ─────────────────── -->
       <div id="home-content">
+        <div class="home-layout">
 
-        <!-- Blog -->
-        <div class="blog-grid" id="blog-grid">
-          <div class="empty-state"><p>Wird geladen…</p></div>
-        </div>
-
-        <!-- Widgets: Termine | Fokusthemen | Aktuell -->
-        <div class="widgets-row">
-
-          <!-- Termine -->
-          <div class="sidebar-widget">
-            <div class="sidebar-widget-header">Termine</div>
-            <div class="sidebar-widget-body" id="termine-list">
-              <div class="empty-state" style="padding:12px"><p>Wird geladen…</p></div>
+          <!-- Blog links -->
+          <div class="home-main">
+            <div class="blog-grid" id="blog-grid">
+              <div class="empty-state"><p>Wird geladen…</p></div>
             </div>
           </div>
 
-          <!-- Fokusthemen -->
-          <div class="sidebar-widget">
-            <div class="sidebar-widget-header">Fokusthemen</div>
-            <div class="sidebar-widget-body" id="fokus-list">
-              <div class="empty-state" style="padding:12px"><p>Wird geladen…</p></div>
+          <!-- Widgets rechts, untereinander -->
+          <aside class="home-sidebar">
+
+            <!-- Termine -->
+            <div class="sidebar-widget">
+              <div class="sidebar-widget-header">Termine</div>
+              <div class="sidebar-widget-body" id="termine-list">
+                <div class="empty-state" style="padding:12px"><p>Wird geladen…</p></div>
+              </div>
             </div>
-          </div>
 
-          <!-- Newsticker -->
-          <div class="ticker-bar">
-            <div class="ticker-label">Aktuell</div>
-            <ul class="ticker-list" id="ticker-list">
-              <li class="ticker-list-item">Wird geladen…</li>
-            </ul>
-          </div>
+            <!-- Fokusthemen -->
+            <div class="sidebar-widget">
+              <div class="sidebar-widget-header">Fokusthemen</div>
+              <div class="sidebar-widget-body" id="fokus-list">
+                <div class="empty-state" style="padding:12px"><p>Wird geladen…</p></div>
+              </div>
+            </div>
 
-        </div><!-- /.widgets-row -->
+            <!-- Newsticker -->
+            <div class="ticker-bar">
+              <div class="ticker-label">Aktuell</div>
+              <ul class="ticker-list" id="ticker-list">
+                <li class="ticker-list-item">Wird geladen…</li>
+              </ul>
+            </div>
+
+          </aside>
+        </div><!-- /.home-layout -->
       </div><!-- /#home-content -->
     </div>
   </main>
