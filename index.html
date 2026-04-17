@@ -23,7 +23,7 @@
       <div class="nav-inner">
         <a class="nav-link active" href="index.html">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          Startseite
+          Aktuelles
         </a>
         <a class="nav-link" href="wir.html">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
@@ -32,10 +32,6 @@
         <a class="nav-link" href="arbeitsorganisation.html">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
           Arbeitsorganisation
-        </a>
-        <a class="nav-link" href="aktuelles.html">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 0-2 2zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8z"/></svg>
-          Aktuelles
         </a>
         <a class="nav-link" href="organigramm.html">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="5" rx="1"/><rect x="2" y="16" width="8" height="5" rx="1"/><rect x="14" y="16" width="8" height="5" rx="1"/><path d="M12 8v4M6 12h12M6 12v4M18 12v4"/></svg>
@@ -65,23 +61,39 @@
         <p class="page-subtitle">Neuigkeiten und Informationen aus der Abteilung</p>
       </div>
 
-      <div class="home-layout">
+      <!-- ── Suche ──────────────────────────── -->
+      <div class="search-wrap">
+        <div class="search-bar">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input
+            class="search-input"
+            id="search-input"
+            type="search"
+            placeholder="Alle Seiten durchsuchen…"
+            autocomplete="off"
+            spellcheck="false"
+          >
+          <button class="search-clear hidden" id="search-clear" title="Suche leeren">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          </button>
+        </div>
+        <div class="search-results hidden" id="search-results"></div>
+      </div>
+
+      <!-- ── Normaler Inhalt ─────────────────── -->
+      <div id="home-content">
+
         <!-- Blog -->
-        <div class="home-main">
-          <div class="blog-grid" id="blog-grid">
-            <div class="empty-state"><p>Wird geladen…</p></div>
-          </div>
+        <div class="blog-grid" id="blog-grid">
+          <div class="empty-state"><p>Wird geladen…</p></div>
         </div>
 
-        <!-- Sidebar: Termine, Fokus, Ticker -->
-        <aside class="home-sidebar">
+        <!-- Widgets: Termine | Fokusthemen | Aktuell -->
+        <div class="widgets-row">
 
           <!-- Termine -->
           <div class="sidebar-widget">
-            <div class="sidebar-widget-header">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              Termine
-            </div>
+            <div class="sidebar-widget-header">Termine</div>
             <div class="sidebar-widget-body" id="termine-list">
               <div class="empty-state" style="padding:12px"><p>Wird geladen…</p></div>
             </div>
@@ -89,10 +101,7 @@
 
           <!-- Fokusthemen -->
           <div class="sidebar-widget">
-            <div class="sidebar-widget-header">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-              Fokusthemen
-            </div>
+            <div class="sidebar-widget-header">Fokusthemen</div>
             <div class="sidebar-widget-body" id="fokus-list">
               <div class="empty-state" style="padding:12px"><p>Wird geladen…</p></div>
             </div>
@@ -106,8 +115,8 @@
             </ul>
           </div>
 
-        </aside>
-      </div>
+        </div><!-- /.widgets-row -->
+      </div><!-- /#home-content -->
     </div>
   </main>
 
@@ -212,12 +221,18 @@
         list.innerHTML = '<div class="empty-state" style="padding:12px"><p>Keine Fokusthemen definiert.</p></div>';
         return;
       }
-      list.innerHTML = items.map(f => `
-        <div class="fokus-item">
-          <div class="fokus-title">${DRV.escapeHtml(f.title)}</div>
-          ${f.description ? `<div class="fokus-desc">${DRV.escapeHtml(f.description)}</div>` : ''}
-        </div>
-      `).join('');
+      list.innerHTML = items.map(f => {
+        const tag   = f.url ? 'a' : 'div';
+        const href  = f.url ? ` href="${DRV.escapeHtml(f.url)}" target="_blank" rel="noopener"` : '';
+        return `
+        <${tag} class="fokus-link"${href}>
+          <div class="fokus-link-icon"></div>
+          <div class="fokus-link-body">
+            <div class="fokus-link-title">${DRV.escapeHtml(f.title)}</div>
+            ${f.description ? `<div class="fokus-link-desc">${DRV.escapeHtml(f.description)}</div>` : ''}
+          </div>
+        </${tag}>`;
+      }).join('');
     }
 
     // ── Listener registrieren ─────────────────
@@ -225,6 +240,196 @@
     DRV.subscribe('ticker',  renderTicker);
     DRV.subscribe('termine', renderTermine);
     DRV.subscribe('fokus',   renderFokus);
+
+    // ════════════════════════════════════════════
+    // Suche
+    // ════════════════════════════════════════════
+
+    // Statischer Suchindex für HTML-Seiten ohne localStorage
+    const STATIC_INDEX = [
+      // ── Wir ──────────────────────────────────
+      { title: 'Lorem ipsum dolor',          body: 'Sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',             url: 'wir.html', type: 'Seite' },
+      { title: 'Wert – Lorem',               body: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt',                              url: 'wir.html', type: 'Seite' },
+      { title: 'Wert – Ipsum',               body: 'Ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip',                                    url: 'wir.html', type: 'Seite' },
+      { title: 'Wert – Dolor',               body: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat',                               url: 'wir.html', type: 'Seite' },
+      { title: 'Wert – Amet',                body: 'Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt',                                    url: 'wir.html', type: 'Seite' },
+      { title: 'Wert – Consectetur',         body: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque',                                url: 'wir.html', type: 'Seite' },
+      { title: 'Wert – Adipiscing',          body: 'Totam rem aperiam eaque ipsa quae ab illo inventore veritatis et quasi architecto',                                    url: 'wir.html', type: 'Seite' },
+      { title: 'Lorem Ipsum',                body: 'Dolor sit amet Kontakt Ansprechperson',                                                                                  url: 'wir.html', type: 'Seite' },
+      { title: 'Consectetur Adipiscing',     body: 'Elit sed do eiusmod Kontakt Ansprechperson',                                                                             url: 'wir.html', type: 'Seite' },
+      { title: 'Duis Eiusmod',               body: 'Tempor incididunt ut labore Kontakt Ansprechperson',                                                                     url: 'wir.html', type: 'Seite' },
+      { title: 'Ut Veniam',                  body: 'Quis nostrud exercitation Kontakt Ansprechperson',                                                                       url: 'wir.html', type: 'Seite' },
+
+      // ── Arbeitsorganisation ───────────────────
+      { title: 'Lorem ipsum dolor',          body: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore magna aliqua',       url: 'arbeitsorganisation.html', type: 'Seite' },
+      { title: 'Consectetur adipiscing',     body: 'Ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis',               url: 'arbeitsorganisation.html', type: 'Seite' },
+      { title: 'Duis aute irure',            body: 'In voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident',         url: 'arbeitsorganisation.html', type: 'Seite' },
+      { title: 'Mollit anim laborum',        body: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque totam rem aperiam',               url: 'arbeitsorganisation.html', type: 'Seite' },
+      { title: 'Nemo enim ipsam voluptatem', body: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore',           url: 'arbeitsorganisation.html', type: 'Seite' },
+
+      // ── Organigramm ───────────────────────────
+      { title: 'Lorem ipsum – Dolor Sit',    body: 'Consectetur adipiscing Leitung Struktur',                                         url: 'organigramm.html', type: 'Seite' },
+      { title: 'Sed eiusmod – Ut Labore',    body: 'Tempor incididunt dolore magna aliqua Ut enim ad minim veniam Quis nostrud',       url: 'organigramm.html', type: 'Seite' },
+      { title: 'Ullamco laboris – Nisi',     body: 'Ex ea commodo consequat Duis aute irure dolor in reprehenderit voluptate velit',   url: 'organigramm.html', type: 'Seite' },
+      { title: 'Pariatur – Sint Occaecat',   body: 'Cupidatat non proident sunt Culpa qui officia deserunt mollit anim id est',        url: 'organigramm.html', type: 'Seite' },
+
+      // ── Schwarzes Brett ───────────────────────
+      { title: 'Schwarzes Brett',            body: 'Anzeigen Gesuche Mitfahren Biete Suche Verschenken Sport Freizeit Lorem Ipsum',    url: 'schwarzes-brett.html', type: 'Seite' },
+
+      // ── Kalender ─────────────────────────────
+      { title: 'Kalender',                   body: 'Termine Veranstaltungen Kalender Monatsansicht Lorem Ipsum',                       url: 'kalender.html', type: 'Seite' },
+    ];
+
+    const TYPE_META = {
+      'Beitrag':       { icon: '📰', page: 'Aktuelles',         color: 'var(--navy)' },
+      'Termin':        { icon: '📅', page: 'Kalender',           color: '#0a7a5e' },
+      'Anzeige':       { icon: '📌', page: 'Schwarzes Brett',    color: '#7a4f0a' },
+      'Fokusthema':    { icon: '🎯', page: 'Aktuelles',         color: '#6a0a7a' },
+      'Meldung':       { icon: '📢', page: 'Aktuelles',         color: '#0a3a7a' },
+      'Seite':         { icon: '📄', page: '',                   color: 'var(--gray-600)' },
+    };
+
+    function buildDynamicIndex() {
+      const items = [];
+
+      DRV.getAll('blog').forEach(p => items.push({
+        title: p.title,
+        body: [p.excerpt, p.author, p.category].filter(Boolean).join(' '),
+        url: 'index.html', type: 'Beitrag', date: p.createdAt,
+      }));
+
+      DRV.getAll('ticker').forEach(t => items.push({
+        title: t.text,
+        body: '',
+        url: 'index.html', type: 'Meldung',
+      }));
+
+      DRV.getAll('termine').forEach(t => items.push({
+        title: t.title,
+        body: [t.date, t.time, t.location].filter(Boolean).join(' '),
+        url: 'kalender.html', type: 'Termin',
+      }));
+
+      DRV.getAll('fokus').forEach(f => items.push({
+        title: f.title,
+        body: f.description || '',
+        url: f.url || 'index.html', type: 'Fokusthema',
+      }));
+
+      DRV.getAll('board').forEach(a => items.push({
+        title: a.title,
+        body: [a.text, a.author, a.category].filter(Boolean).join(' '),
+        url: 'schwarzes-brett.html', type: 'Anzeige',
+      }));
+
+      return [...items, ...STATIC_INDEX];
+    }
+
+    function highlight(text, query) {
+      if (!text || !query) return DRV.escapeHtml(text || '');
+      const escaped = DRV.escapeHtml(text);
+      const re = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+      return escaped.replace(re, '<mark>$1</mark>');
+    }
+
+    function performSearch(raw) {
+      const query = raw.trim();
+      const resultsEl = document.getElementById('search-results');
+      const homeEl    = document.getElementById('home-content');
+      const clearBtn  = document.getElementById('search-clear');
+
+      clearBtn.classList.toggle('hidden', !raw);
+
+      if (!query || query.length < 2) {
+        resultsEl.classList.add('hidden');
+        homeEl.classList.remove('hidden');
+        return;
+      }
+
+      homeEl.classList.add('hidden');
+      resultsEl.classList.remove('hidden');
+
+      const index   = buildDynamicIndex();
+      const lower   = query.toLowerCase();
+      const matched = index.filter(item =>
+        (item.title || '').toLowerCase().includes(lower) ||
+        (item.body  || '').toLowerCase().includes(lower)
+      );
+
+      if (!matched.length) {
+        resultsEl.innerHTML = `
+          <div class="search-empty">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <p>Keine Ergebnisse für <strong>${DRV.escapeHtml(query)}</strong></p>
+          </div>`;
+        return;
+      }
+
+      // Ergebnisse nach Typ gruppieren
+      const groups = {};
+      matched.forEach(item => {
+        if (!groups[item.type]) groups[item.type] = [];
+        groups[item.type].push(item);
+      });
+
+      const typeOrder = ['Beitrag','Termin','Anzeige','Fokusthema','Meldung','Seite'];
+      let html = `<div class="search-count">${matched.length} Ergebnis${matched.length !== 1 ? 'se' : ''} für <strong>${DRV.escapeHtml(query)}</strong></div>`;
+
+      typeOrder.forEach(type => {
+        if (!groups[type]) return;
+        const meta = TYPE_META[type];
+        html += `<div class="search-group">
+          <div class="search-group-label">${meta.icon} ${type}${groups[type].length > 1 ? 'e' : ''} ${meta.page ? '· ' + meta.page : ''}</div>`;
+
+        groups[type].slice(0, 5).forEach(item => {
+          const snippet = item.body
+            ? item.body.substring(0, 100) + (item.body.length > 100 ? '…' : '')
+            : '';
+          html += `
+            <a class="search-result-item" href="${DRV.escapeHtml(item.url)}">
+              <div class="search-result-title">${highlight(item.title, query)}</div>
+              ${snippet ? `<div class="search-result-snippet">${highlight(snippet, query)}</div>` : ''}
+            </a>`;
+        });
+
+        if (groups[type].length > 5) {
+          html += `<div class="search-more">+ ${groups[type].length - 5} weitere</div>`;
+        }
+
+        html += `</div>`;
+      });
+
+      resultsEl.innerHTML = html;
+    }
+
+    // ── Events ────────────────────────────────
+    let searchTimer = null;
+    const searchInput = document.getElementById('search-input');
+    const searchClear = document.getElementById('search-clear');
+
+    searchInput.addEventListener('input', () => {
+      clearTimeout(searchTimer);
+      searchTimer = setTimeout(() => performSearch(searchInput.value), 200);
+    });
+
+    searchClear.addEventListener('click', () => {
+      searchInput.value = '';
+      searchInput.focus();
+      performSearch('');
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && searchInput.value) {
+        searchInput.value = '';
+        performSearch('');
+      }
+      // Slash-Taste öffnet Suche
+      if (e.key === '/' && document.activeElement !== searchInput) {
+        e.preventDefault();
+        searchInput.focus();
+        searchInput.select();
+      }
+    });
   </script>
 
 </body>

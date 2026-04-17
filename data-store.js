@@ -18,72 +18,72 @@
     termine: 'drv_termine',
     fokus:   'drv_fokusthemen',
   };
-  const SEED_FLAG = 'drv_seeded_v2';
+  const SEED_FLAG = 'drv_seeded_v3';
 
   // ── Demo-Seed (einmalig beim ersten Laden) ──
   const DEMO_BLOG = [
     {
       id: 'seed_b1',
-      title: 'Neue Regelungen zur Flexi-Rente ab 2026',
-      excerpt: 'Die wichtigsten Änderungen im Überblick: Was sich für Versicherte und Arbeitgeber ändert und welche Fristen zu beachten sind.',
-      author: 'Dr. Martina Schreiber',
+      title: 'Lorem ipsum dolor sit amet consectetur',
+      excerpt: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
+      author: 'Lorem Ipsum',
       readTime: '4 Min.',
-      category: 'Gesetzgebung',
+      category: 'Lorem',
       createdAt: '2026-04-12T08:00:00.000Z',
     },
     {
       id: 'seed_b2',
-      title: 'IT-Modernisierung: Rollout Phase 3 gestartet',
-      excerpt: 'Der dritte Abschnitt der digitalen Transformation unserer Fachanwendungen beginnt planmäßig. Alle Teams erhalten bis Ende Mai Zugang.',
-      author: 'Thomas Krüger',
+      title: 'Ut enim ad minim veniam quis nostrud',
+      excerpt: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.',
+      author: 'Dolor Amet',
       readTime: '3 Min.',
-      category: 'IT & Digital',
+      category: 'Ipsum',
       createdAt: '2026-04-08T08:00:00.000Z',
     },
     {
       id: 'seed_b3',
-      title: 'Ergebnisse der Mitarbeiterbefragung 2025',
-      excerpt: 'Die Auswertung liegt vor: Hohe Zufriedenheit bei der Zusammenarbeit, Verbesserungsbedarf beim Wissensmanagement.',
-      author: 'Sandra Hoffmann',
+      title: 'Excepteur sint occaecat cupidatat non proident',
+      excerpt: 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa quae ab illo inventore.',
+      author: 'Consectetur Sit',
       readTime: '6 Min.',
-      category: 'Personal',
+      category: 'Dolor',
       createdAt: '2026-04-02T08:00:00.000Z',
     },
     {
       id: 'seed_b4',
-      title: 'Schulungsangebot Q2: Jetzt anmelden',
-      excerpt: 'Von agilen Methoden bis Zeitmanagement – das neue Quartalsprogramm der internen Weiterbildung steht bereit.',
-      author: 'Personalentwicklung',
+      title: 'Nemo enim ipsam voluptatem quia voluptas',
+      excerpt: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt.',
+      author: 'Adipiscing Elit',
       readTime: '2 Min.',
-      category: 'Weiterbildung',
+      category: 'Amet',
       createdAt: '2026-03-28T08:00:00.000Z',
     },
   ];
 
   const DEMO_TICKER = [
-    { id: 'seed_t1', text: '📌 Betriebsversammlung am 24. April um 14:00 Uhr im Großen Saal', createdAt: '2026-04-15T08:00:00.000Z' },
-    { id: 'seed_t2', text: '🔧 Wartungsarbeiten am Intranet: Sa 19. April, 06:00–10:00 Uhr',     createdAt: '2026-04-14T08:00:00.000Z' },
-    { id: 'seed_t3', text: '🎉 Herzlichen Glückwunsch an Team B3 zum erfolgreichen Projektabschluss!', createdAt: '2026-04-13T08:00:00.000Z' },
-    { id: 'seed_t4', text: '📋 Erinnerung: Reisekostenabrechnungen Q1 bis 30. April einreichen',   createdAt: '2026-04-10T08:00:00.000Z' },
-    { id: 'seed_t5', text: '🏃 Firmenlauf Berlin 2026 – Anmeldung bis 15. Mai',                    createdAt: '2026-04-05T08:00:00.000Z' },
+    { id: 'seed_t1', text: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod', createdAt: '2026-04-15T08:00:00.000Z' },
+    { id: 'seed_t2', text: 'Tempor incididunt ut labore et dolore magna aliqua ut enim ad minim', createdAt: '2026-04-14T08:00:00.000Z' },
+    { id: 'seed_t3', text: 'Veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo', createdAt: '2026-04-13T08:00:00.000Z' },
+    { id: 'seed_t4', text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore', createdAt: '2026-04-10T08:00:00.000Z' },
+    { id: 'seed_t5', text: 'Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia', createdAt: '2026-04-05T08:00:00.000Z' },
   ];
 
   const DEMO_ADS = [
-    { id: 'seed_a1', title: 'Schreibtischlampe zu verschenken', text: 'Funktioniert einwandfrei, brauche sie nur nicht mehr. Abholung Haus 1, Zimmer 214.', author: 'M. Weber', category: 'Verschenken', createdAt: '2026-04-14T08:00:00.000Z' },
-    { id: 'seed_a2', title: 'Mitfahrgelegenheit Potsdam ↔ Berlin', text: 'Suche Mitfahrer*in ab Potsdam Hbf, Mo–Do, Abfahrt 7:15. Kostenbeteiligung nach Absprache.', author: 'K. Neumann', category: 'Mitfahren', createdAt: '2026-04-11T08:00:00.000Z' },
-    { id: 'seed_a3', title: 'Laufgruppe mittwochs', text: 'Wir joggen jeden Mittwoch um 17:30 ab Haupteingang, ca. 5 km. Alle Levels willkommen!', author: 'S. Park', category: 'Sport & Freizeit', createdAt: '2026-04-09T08:00:00.000Z' },
+    { id: 'seed_a1', title: 'Lorem ipsum dolor sit amet', text: 'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', author: 'L. Ipsum', category: 'Verschenken', createdAt: '2026-04-14T08:00:00.000Z' },
+    { id: 'seed_a2', title: 'Ut enim ad minim veniam', text: 'Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute.', author: 'D. Amet', category: 'Mitfahren', createdAt: '2026-04-11T08:00:00.000Z' },
+    { id: 'seed_a3', title: 'Duis aute irure dolor', text: 'In reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur sunt in culpa.', author: 'C. Sit', category: 'Sport & Freizeit', createdAt: '2026-04-09T08:00:00.000Z' },
   ];
 
   const DEMO_TERMINE = [
-    { id: 'seed_tr1', title: 'Betriebsversammlung', date: '2026-04-24', time: '14:00 Uhr', location: 'Großer Saal', createdAt: '2026-04-10T08:00:00.000Z' },
-    { id: 'seed_tr2', title: 'Abteilungsbesprechung Q2', date: '2026-05-06', time: '10:00 Uhr', location: 'Konferenzraum A3', createdAt: '2026-04-09T08:00:00.000Z' },
-    { id: 'seed_tr3', title: 'Firmenlauf Berlin', date: '2026-05-15', time: '17:30 Uhr', location: 'Treffpunkt Haupteingang', createdAt: '2026-04-05T08:00:00.000Z' },
+    { id: 'seed_tr1', title: 'Lorem ipsum dolor', date: '2026-04-24', time: '14:00 Uhr', location: 'Sit amet', createdAt: '2026-04-10T08:00:00.000Z' },
+    { id: 'seed_tr2', title: 'Consectetur adipiscing', date: '2026-05-06', time: '10:00 Uhr', location: 'Elit sed', createdAt: '2026-04-09T08:00:00.000Z' },
+    { id: 'seed_tr3', title: 'Eiusmod tempor incididunt', date: '2026-05-15', time: '17:30 Uhr', location: 'Ut labore', createdAt: '2026-04-05T08:00:00.000Z' },
   ];
 
   const DEMO_FOKUS = [
-    { id: 'seed_f1', title: 'Digitale Transformation', description: 'Umsetzung der IT-Roadmap 2025–2027 und Ablösung von Altsystemen.', createdAt: '2026-04-10T08:00:00.000Z' },
-    { id: 'seed_f2', title: 'Fachkräftegewinnung', description: 'Gezielte Maßnahmen zur Nachwuchsförderung und Mitarbeiterbindung.', createdAt: '2026-04-08T08:00:00.000Z' },
-    { id: 'seed_f3', title: 'Nachhaltigkeitsstrategie', description: 'Umsetzung der Klimaschutzziele und Green-IT-Initiativen im Haus.', createdAt: '2026-04-01T08:00:00.000Z' },
+    { id: 'seed_f1', title: 'Lorem ipsum dolor',    url: '#', description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.', createdAt: '2026-04-10T08:00:00.000Z' },
+    { id: 'seed_f2', title: 'Consectetur adipiscing', url: '#', description: 'Ut enim ad minim veniam quis nostrud exercitation ullamco laboris.', createdAt: '2026-04-08T08:00:00.000Z' },
+    { id: 'seed_f3', title: 'Duis aute irure',       url: '#', description: 'Dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.', createdAt: '2026-04-01T08:00:00.000Z' },
   ];
 
   // ── Pub/Sub-Listener ────────────────────────
@@ -189,8 +189,9 @@
   // ── Erstinitialisierung mit Demo-Daten ─────
   function seedIfEmpty() {
     if (localStorage.getItem(SEED_FLAG)) return;
-    // Ältere Seed-Flags löschen
+    // Ältere Seed-Flags entfernen
     localStorage.removeItem('drv_seeded_v1');
+    localStorage.removeItem('drv_seeded_v2');
     saveAll('blog', DEMO_BLOG);
     saveAll('ticker', DEMO_TICKER);
     saveAll('board', DEMO_ADS);
